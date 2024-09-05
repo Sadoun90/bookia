@@ -35,11 +35,12 @@ class CustomButton extends StatelessWidget {
                   side: isOutline
                       ? BorderSide(color: AppColors.textColor)
                       : BorderSide.none,
-                  borderRadius: BorderRadius.circular(10))),
+                  borderRadius: BorderRadius.circular(6))),
           onPressed: onPressed,
           child: Text(
             text,
-            style: getSmallTextStyle(color: isOutline ? AppColors.textColor : AppColors.whiteColor),
+            style: getSmallTextStyle(
+                color: isOutline ? AppColors.textColor : AppColors.whiteColor),
           )),
     );
   }

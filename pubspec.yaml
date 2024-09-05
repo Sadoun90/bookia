@@ -7,11 +7,14 @@ environment:
   sdk: ^3.5.1
 
 dependencies:
+  carousel_slider: ^5.0.0
   flutter:
     sdk: flutter
   flutter_angle: ^0.0.4
+  flutter_staggered_grid_view: ^0.7.0
   flutter_svg: ^2.0.10+1
   gap: ^3.0.1
+  smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
   flutter_lints: ^4.0.0

@@ -5,6 +5,7 @@ import 'package:bookia/core/utils/text_style.dart';
 import 'package:bookia/core/widgets/custom_Button.dart';
 import 'package:bookia/features/auth/presentation/page/Register_View.dart';
 import 'package:bookia/features/auth/presentation/page/confirm_password.dart';
+import 'package:bookia/features/auth/presentation/widgets/nav_bar_widget.dart';
 import 'package:bookia/features/auth/presentation/widgets/or_divider_widgt.dart';
 import 'package:bookia/features/auth/presentation/widgets/social_btn_card.dart';
 import 'package:flutter/material.dart';
@@ -186,7 +187,7 @@ class _LoginViewState extends State<LoginView> {
                   width: 330,
                   text: 'Login',
                   onPressed: () {
-                    Push(context, LoginView());
+                    PushAndRemoveUntil(context, NavBarWidget());
                   },
                 ),
               ),

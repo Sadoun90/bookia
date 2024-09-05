@@ -10,6 +10,15 @@ class AppTheme {
         backgroundColor: AppColors.whiteColor,
         centerTitle: true,
       ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: AppColors.whiteColor,
+        elevation: 0,
+        selectedItemColor: AppColors.primaryColor,
+        unselectedItemColor: AppColors.blackColor,
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+      ),
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primaryColor,
         onSurface: AppColors.blackColor,
