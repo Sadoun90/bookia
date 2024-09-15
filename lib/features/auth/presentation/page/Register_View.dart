@@ -41,9 +41,13 @@ class _RegisterViewState extends State<RegisterView> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
+          Navigator.pop(context);
           PushAndRemoveUntil(context, NavBarWidget());
         } else if (state is RegisterErrorState) {
+          Navigator.pop(context);
           showErrorDialog(context, state.error);
+        } else if (state is RegisterLoadingState) {
+          ShowLoadingDialogs(context);
         }
       },
       builder: (context, state) {
@@ -318,27 +322,27 @@ class _RegisterViewState extends State<RegisterView> {
                       },
                     ),
                     const Gap(20),
-                    state is RegisterLoadingState
-                        ? Center(child: const CircularProgressIndicator())
-                        : Center(
-                            child: CustomButton(
-                              width: 330,
-                              text: 'Register',
-                              onPressed: () {
-                                if (formKey.currentState!.validate()) {
-                                  context
-                                      .read<AuthBloc>()
-                                      .add(RegisterEvent(RegisterParams(
-                                        name: nameController.text,
-                                        email: emailController.text,
-                                        password: passwordController.text,
-                                        passwordConfirmation:
-                                            confirmPasswordController.text,
-                                      )));
-                                }
-                              },
-                            ),
-                          ),
+                    Center(
+                      child: CustomButton(
+                        width: 330,
+                        text: 'Register',
+                        onPressed: () {
+                          if (formKey.currentState != null &&
+                              formKey.currentState!.validate()) {
+                            FocusScope.of(context).unfocus();
+                            context
+                                .read<AuthBloc>()
+                                .add(RegisterEvent(RegisterParams(
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  passwordConfirmation:
+                                      confirmPasswordController.text,
+                                )));
+                          }
+                        },
+                      ),
+                    ),
                     const Gap(7),
                     // OrDividerWidget(
                     //   text: 'or Register with',

@@ -19,7 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (value != null) {
           emit(RegisterSuccessState());
         } else {
-          emit(RegisterErrorState("Something went wrong"));
+          emit(RegisterErrorState("Something wrong occured"));
         }
       });
     } on Exception catch (e) {
@@ -34,7 +34,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (value != null) {
           emit(LoginSuccessState());
         } else {
-          emit(LoginErrorState("Something went wrong"));
+          emit(LoginErrorState("Something wrong occured"));
         }
       });
     } on Exception catch (e) {

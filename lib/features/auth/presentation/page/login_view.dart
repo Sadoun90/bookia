@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -30,72 +31,78 @@ class _LoginViewState extends State<LoginView> {
   var formKey = GlobalKey<FormState>();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is LoginSuccessState) {
-            PushAndRemoveUntil(context, NavBarWidget());
-          } else if (state is LoginErrorState) {
-            showErrorDialog(context, state.error);
-          }
-        },
-        child: Scaffold(
+      listener: (context, state) {
+        if (state is LoginSuccessState) {
+          Navigator.pop(context);
+          PushAndRemoveUntil(context, NavBarWidget());
+        } else if (state is LoginErrorState) {
+          Navigator.pop(context);
+          showErrorDialog(context, state.error);
+        } else if (state is LoginLoadingState) {
+          ShowLoadingDialogs(context);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.whiteColor,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: AppColors.whiteColor,
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: AppColors.whiteColor,
-            title: Row(
-              children: [
-                Container(
-                  width: 41,
-                  height: 41,
-                  padding: EdgeInsets.only(right: 3),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: AppColors.whiteColor,
-                      border: Border.all(color: AppColors.borderColor)),
-                  child: const Icon(Icons.arrow_back_ios_new_rounded),
-                )
-              ],
-            ),
-          ),
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Don't have an account?",
-                  style: getBodyTextStyle(fontSize: 14),
+          title: Row(
+            children: [
+              Container(
+                width: 41,
+                height: 41,
+                padding: EdgeInsets.only(right: 3),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.whiteColor,
+                  border: Border.all(color: AppColors.borderColor),
                 ),
-                TextButton(
-                    onPressed: () {
-                      PushWithReplacement(context, const RegisterView());
-                    },
-                    child: Text(
-                      'Register Now',
-                      style: getTitleTextStyle(fontSize: 15),
-                    ))
-                // Text(
-                //   'Register Now',
-                //   style: getTitleTextStyle(fontSize: 14),
-                // ),
-              ],
-            ),
+                child: const Icon(Icons.arrow_back_ios_new_rounded),
+              ),
+            ],
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(22),
-            child: SingleChildScrollView(
+        ),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Don't have an account?",
+                style: getBodyTextStyle(fontSize: 14),
+              ),
+              TextButton(
+                onPressed: () {
+                  PushWithReplacement(context, const RegisterView());
+                },
+                child: Text(
+                  'Register Now',
+                  style: getTitleTextStyle(fontSize: 15),
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(22),
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Welcome Back! Glad To See You,Again!',
+                    'Welcome Back! Glad To See You, Again!',
                     style: getTitleTextStyle(
-                        color: AppColors.blackColor,
-                        fontSize: 22,
-                        fontWeight: FontWeight.normal),
+                      color: AppColors.blackColor,
+                      fontSize: 22,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                   const Gap(32),
                   TextFormField(
@@ -104,8 +111,9 @@ class _LoginViewState extends State<LoginView> {
                       hintText: 'Enter your email',
                       hintStyle: getSmallTextStyle(color: AppColors.greyColor),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: AppColors.greyColor)),
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: AppColors.greyColor),
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
@@ -136,67 +144,64 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'please enter your name';
-                      } else {
-                        return null;
+                        return 'please enter your email';
                       }
+                      return null;
                     },
                   ),
-                  Gap(15),
+                  const Gap(15),
                   TextFormField(
                     controller: passwordController,
                     obscureText: isPasswordVisible,
                     decoration: InputDecoration(
-                        hintText: 'Enter your password',
-                        hintStyle:
-                            getSmallTextStyle(color: AppColors.greyColor),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: AppColors.greyColor)),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: AppColors.borderColor,
-                          ),
+                      hintText: 'Enter your password',
+                      hintStyle: getSmallTextStyle(color: AppColors.greyColor),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: AppColors.greyColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: AppColors.borderColor,
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: AppColors.primaryColor,
-                            width: 2.0,
-                          ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: AppColors.primaryColor,
+                          width: 2.0,
                         ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: AppColors.redColor,
-                            width: 2.0,
-                          ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: AppColors.redColor,
+                          width: 2.0,
                         ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: AppColors.redColor,
-                            width: 2.0,
-                          ),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: AppColors.redColor,
+                          width: 2.0,
                         ),
-                        suffixIconConstraints: BoxConstraints(maxWidth: 33),
-                        suffixIcon: Row(
-                          children: [
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    isPasswordVisible = !isPasswordVisible;
-                                  });
-                                },
-                                child: SvgPicture.asset(AssetesIcons.eyeSvg)),
-                          ],
-                        )),
+                      ),
+                      suffixIconConstraints: BoxConstraints(maxWidth: 33),
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          setState(() {
+                            isPasswordVisible = !isPasswordVisible;
+                          });
+                        },
+                        child: SvgPicture.asset(AssetesIcons.eyeSvg),
+                      ),
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'please enter your name';
+                        return 'please enter your password';
                       } else if (value.length < 6) {
-                        return ('Passwprd must be at least 6 characters');
+                        return 'Password must be at least 6 characters';
                       }
                       return null;
                     },
@@ -204,16 +209,19 @@ class _LoginViewState extends State<LoginView> {
                   const Gap(20),
                   Row(
                     children: [
-                      Spacer(),
+                      const Spacer(),
                       TextButton(
-                          onPressed: () {
-                            Push(context, ConfirmPassword());
-                          },
-                          child: Text(
-                            'Forget Password?',
-                            style: getTitleTextStyle(
-                                fontSize: 15, color: AppColors.blackColor),
-                          ))
+                        onPressed: () {
+                          Push(context, const ConfirmPassword());
+                        },
+                        child: Text(
+                          'Forget Password?',
+                          style: getTitleTextStyle(
+                            fontSize: 15,
+                            color: AppColors.blackColor,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   const Gap(20),
@@ -224,25 +232,25 @@ class _LoginViewState extends State<LoginView> {
                       onPressed: () {
                         if (formKey.currentState != null &&
                             formKey.currentState!.validate()) {
+                          FocusScope.of(context).unfocus();
                           context.read<AuthBloc>().add(LoginEvent(
                                 email: emailController.text,
                                 password: passwordController.text,
                               ));
                         }
-                        PushWithReplacement(context, const NavBarWidget());
                       },
                     ),
                   ),
-                  Gap(30),
-                  OrDividerWidget(
-                    text: 'or login with',
-                  ),
+                  const Gap(30),
+                  const OrDividerWidget(text: 'or login with'),
                   const Gap(20),
-                  SocialButtonsCard()
+                  const SocialButtonsCard(),
                 ],
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

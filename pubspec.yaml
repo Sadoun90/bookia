@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   carousel_slider: ^5.0.0
+  dio: ^5.7.0
   flutter:
     sdk: flutter
   flutter_angle: ^0.0.4
@@ -16,6 +17,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   gap: ^3.0.1
   http: ^1.2.2
+  lottie: ^3.1.2
   smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
