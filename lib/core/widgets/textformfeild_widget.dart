@@ -6,16 +6,18 @@ class TextFormFeildWidget extends StatelessWidget {
   const TextFormFeildWidget({
     super.key,
     required this.text,
-    this.maxlines = 1, 
+    this.maxlines = 1,
+    this.suffixIcon,
   });
 
   final String text;
   final int maxlines;
+  final Widget? suffixIcon; // تغير النوع من IconData? إلى Widget?
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: maxlines, 
+      maxLines: maxlines,
       decoration: InputDecoration(
         hintText: text,
         hintStyle: getSmallTextStyle(color: AppColors.greyColor),
@@ -50,6 +52,7 @@ class TextFormFeildWidget extends StatelessWidget {
             width: 2.0,
           ),
         ),
+        suffixIcon: suffixIcon != null ? suffixIcon : null,
       ),
     );
   }

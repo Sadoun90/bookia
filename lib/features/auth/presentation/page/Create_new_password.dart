@@ -20,23 +20,22 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
       backgroundColor: AppColors.whiteColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-          backgroundColor: AppColors.whiteColor,
-          title: Row(
-            children: [
-              Container(
-                width: 41,
-                height: 41,
-                padding: EdgeInsets.only(right: 3),
-                decoration: BoxDecoration(
+        backgroundColor: AppColors.whiteColor,
+        title: Row(
+          children: [
+            Container(
+              width: 41,
+              height: 41,
+              padding: EdgeInsets.only(right: 3),
+              decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: AppColors.whiteColor,
-                  border: Border.all(color: AppColors.borderColor)
-                ),
-                child: Icon (Icons.arrow_back_ios_new_rounded),
-              )
-            ],
-          ),
-          ),
+                  border: Border.all(color: AppColors.borderColor)),
+              child: Icon(Icons.arrow_back_ios_new_rounded),
+            )
+          ],
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: SingleChildScrollView(

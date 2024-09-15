@@ -1,7 +1,10 @@
 import 'package:bookia/core/constants/assetes_icons.dart';
+import 'package:bookia/core/functions/navigation.dart';
 import 'package:bookia/core/utils/colors.dart';
 import 'package:bookia/core/utils/text_style.dart';
 import 'package:bookia/core/widgets/custom_Button.dart';
+import 'package:bookia/features/home/presentation/page/book_details.dart';
+import 'package:bookia/features/home/presentation/page/notification_view.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +26,8 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.whiteColor,
+        automaticallyImplyLeading: false,
         centerTitle: false,
         title: SvgPicture.asset(
           AssetesIcons.logoSvg,
@@ -30,7 +35,9 @@ class _HomeViewState extends State<HomeView> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Push(context, NotificationView());
+            },
             icon: SvgPicture.asset(AssetesIcons.notificationSvg),
           ),
           IconButton(
@@ -57,11 +64,44 @@ class _HomeViewState extends State<HomeView> {
                       fit: BoxFit.cover,
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Find out the best books to read when you don’t even know what to read!!!',
+                          style: getBodyTextStyle(
+                              color: AppColors.whiteColor, fontSize: 12),
+                        ),
+                        Gap(30),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.whiteColor,
+                                  foregroundColor: AppColors.primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Explore',
+                                  style: getBodyTextStyle(
+                                      color: AppColors.primaryColor,
+                                      fontSize: 12),
+                                )),
+                          ],
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
               options: CarouselOptions(
                 height: 150,
-                viewportFraction: 0.8,
+                viewportFraction: 1,
                 initialPage: 0,
                 enlargeCenterPage: true,
                 onPageChanged: (value, reason) {
@@ -105,13 +145,12 @@ class _HomeViewState extends State<HomeView> {
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Two items per row
+                  crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio:
-                      0.56, // Adjust this ratio to fit the content properly
+                  childAspectRatio: 0.574,
                 ),
-                itemCount: 4, // Number of items in the grid
+                itemCount: 4,
                 itemBuilder: (context, index) => Container(
                   decoration: BoxDecoration(
                     color: AppColors.secondaryColor,
@@ -121,25 +160,28 @@ class _HomeViewState extends State<HomeView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(top: 8, left: 10),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.asset(
-                            AssetesIcons.popularbooksBg,
-                            width:
-                                140, // Ensure the image width matches container width
-                            height: 175, // Adjust height as needed
+                            AssetesIcons.popularimageBg,
+                            width: 140,
+                            height: 175,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'The Republic',
-                            style: getBodyTextStyle(
-                              color: AppColors.blackColor,
-                              fontSize: 15,
+                          Padding(
+                            padding: const EdgeInsets.all(3),
+                            child: Text(
+                              'The Republic',
+                              style: getBodyTextStyle(
+                                color: AppColors.blackColor,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
                           Padding(
@@ -150,7 +192,7 @@ class _HomeViewState extends State<HomeView> {
                                   '₹285',
                                   style: getBodyTextStyle(
                                     color: AppColors.blackColor,
-                                    fontSize: 12,
+                                    fontSize: 13,
                                   ),
                                 ),
                                 Spacer(),
@@ -162,7 +204,9 @@ class _HomeViewState extends State<HomeView> {
                                       borderRadius: BorderRadius.circular(13),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Push(context, BookDetails());
+                                  },
                                   child: Text(
                                     'Buy',
                                     style: getBodyTextStyle(

@@ -31,12 +31,15 @@ class PasswordChanged extends StatelessWidget {
                     fontWeight: FontWeight.w400),
               ),
               const Gap(10),
-              Text(
-                "Your password has been changed successfully.",
-                style: getTitleTextStyle(
-                    color: AppColors.greyColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal),
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: Text(
+                  "Your password has been changed successfully.",
+                  style: getTitleTextStyle(
+                      color: AppColors.greyColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal),
+                ),
               ),
               Gap(20),
               CustomButton(

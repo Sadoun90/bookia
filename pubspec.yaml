@@ -11,9 +11,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_angle: ^0.0.4
+  flutter_bloc: ^8.1.6
   flutter_staggered_grid_view: ^0.7.0
   flutter_svg: ^2.0.10+1
   gap: ^3.0.1
+  http: ^1.2.2
   smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
