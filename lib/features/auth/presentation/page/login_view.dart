@@ -1,8 +1,10 @@
 import 'package:bookia/core/constants/assetes_icons.dart';
 import 'package:bookia/core/functions/dialogs.dart';
 import 'package:bookia/core/functions/navigation.dart';
+import 'package:bookia/core/services/local_storage.dart';
 import 'package:bookia/core/utils/colors.dart';
 import 'package:bookia/core/utils/text_style.dart';
+import 'package:bookia/core/widgets/back_card_widegt.dart';
 import 'package:bookia/core/widgets/custom_Button.dart';
 import 'package:bookia/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:bookia/features/auth/presentation/bloc/auth_event.dart';
@@ -53,17 +55,7 @@ class _LoginViewState extends State<LoginView> {
           backgroundColor: AppColors.whiteColor,
           title: Row(
             children: [
-              Container(
-                width: 41,
-                height: 41,
-                padding: EdgeInsets.only(right: 3),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: AppColors.whiteColor,
-                  border: Border.all(color: AppColors.borderColor),
-                ),
-                child: const Icon(Icons.arrow_back_ios_new_rounded),
-              ),
+              BackCardWidegt(),
             ],
           ),
         ),
@@ -194,7 +186,10 @@ class _LoginViewState extends State<LoginView> {
                             isPasswordVisible = !isPasswordVisible;
                           });
                         },
-                        child: SvgPicture.asset(AssetesIcons.eyeSvg),
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: SvgPicture.asset(AssetesIcons.eyeSvg),
+                        ),
                       ),
                     ),
                     validator: (value) {
@@ -232,7 +227,7 @@ class _LoginViewState extends State<LoginView> {
                       onPressed: () {
                         if (formKey.currentState != null &&
                             formKey.currentState!.validate()) {
-                          FocusScope.of(context).unfocus();
+                          print("Login button clicked!");
                           context.read<AuthBloc>().add(LoginEvent(
                                 email: emailController.text,
                                 password: passwordController.text,

@@ -13,7 +13,6 @@ class RegisterErrorState extends AuthState {
   RegisterErrorState(this.error);
 }
 
-
 //Login
 
 class LoginLoadingState extends AuthState {}

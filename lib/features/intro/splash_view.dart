@@ -1,7 +1,9 @@
 import 'package:bookia/core/constants/assetes_icons.dart';
 import 'package:bookia/core/functions/navigation.dart';
+import 'package:bookia/core/services/local_storage.dart';
 import 'package:bookia/core/utils/colors.dart';
 import 'package:bookia/core/utils/text_style.dart';
+import 'package:bookia/features/auth/presentation/widgets/nav_bar_widget.dart';
 import 'package:bookia/features/intro/welcome_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,10 +20,13 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-
+    String token = LocalStorage.getData(key: LocalStorage.token) ?? '';
     Future.delayed(const Duration(seconds: 3), () {
-      // ignore: use_build_context_synchronously
-      PushWithReplacement(context, const WelcomeView());
+      if (token.isNotEmpty) {
+        PushWithReplacement(context, NavBarWidget());
+      } else {
+        PushWithReplacement(context, WelcomeView());
+      }
     });
   }
 
