@@ -13,7 +13,7 @@ import 'package:bookia/features/auth/presentation/page/login_view.dart';
 import 'package:bookia/features/auth/presentation/widgets/nav_bar_widget.dart';
 import 'package:bookia/features/auth/presentation/widgets/or_divider_widgt.dart';
 import 'package:bookia/features/auth/presentation/widgets/social_btn_card.dart';
-import 'package:bookia/features/home/presentation/page/home_view.dart';
+import 'package:bookia/features/home/presentation/page/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';

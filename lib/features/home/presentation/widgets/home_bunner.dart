@@ -18,6 +18,12 @@ class HomeBunnerWidget extends StatefulWidget {
 class _HomeBunnerWidgetState extends State<HomeBunnerWidget> {
   int selectedBunner = 0;
   @override
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeBloc>().add(GetHomeBunnerEvent());
+  }
+
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       buildWhen: (previous, current) =>

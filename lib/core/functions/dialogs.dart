@@ -11,6 +11,15 @@ void showErrorDialog(BuildContext context, String text) {
   );
 }
 
+void showSuccessDialog(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      backgroundColor: AppColors.primaryColor,
+      content: Text(text),
+    ),
+  );
+}
+
 // ignore: non_constant_identifier_names
 ShowLoadingDialogs(BuildContext context) {
   showDialog(

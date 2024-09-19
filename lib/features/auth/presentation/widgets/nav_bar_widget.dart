@@ -1,10 +1,12 @@
 import 'package:bookia/core/constants/assetes_icons.dart';
 import 'package:bookia/core/utils/colors.dart';
-import 'package:bookia/features/cart/page/cart_view.dart';
-import 'package:bookia/features/home/presentation/page/home_view.dart';
+import 'package:bookia/features/home/presentation/page/cart/cart_view.dart';
+import 'package:bookia/features/home/presentation/bloc/bloc/home_bloc.dart';
+import 'package:bookia/features/home/presentation/page/home/home_view.dart';
 import 'package:bookia/features/profile/page/profile_view.dart';
-import 'package:bookia/features/wishlist/page/wishlist_view.dart';
+import 'package:bookia/features/home/presentation/page/wishlist/wishlist_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class NavBarWidget extends StatefulWidget {

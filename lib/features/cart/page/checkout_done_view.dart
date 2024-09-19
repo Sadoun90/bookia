@@ -4,7 +4,7 @@ import 'package:bookia/core/utils/colors.dart';
 import 'package:bookia/core/utils/text_style.dart';
 import 'package:bookia/core/widgets/custom_Button.dart';
 import 'package:bookia/features/auth/presentation/page/login_view.dart';
-import 'package:bookia/features/home/presentation/page/home_view.dart';
+import 'package:bookia/features/home/presentation/page/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';

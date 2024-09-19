@@ -12,12 +12,27 @@ class DioProvider {
     ));
   }
 
-  static Future<Response> get({required String endPoint}) {
-    return dio.get(endPoint);
+  static Future<Response> get(
+      {required String endPoint, Map<String, dynamic>? headers}) {
+    return dio.get(endPoint, options: Options(headers: headers));
   }
 
   static Future<Response> post(
-      {required String endPoint, Map<String, dynamic>? data}) {
-    return dio.post(endPoint, data: data);
+      {required String endPoint,
+      Map<String, dynamic>? data,
+      Map<String, dynamic>? headers}) {
+    return dio.post(endPoint, data: data, options: Options(headers: headers));
+  }
+
+  static Future<Response> put(
+      {required String endPoint,
+      Map<String, dynamic>? data,
+      Map<String, dynamic>? headers}) {
+    return dio.get(endPoint, data: data, options: Options(headers: headers));
+  }
+
+  static Future<Response> delete(
+      {required String endPoint, Map<String, dynamic>? headers}) {
+    return dio.get(endPoint, options: Options(headers: headers));
   }
 }
